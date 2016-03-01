@@ -1,1 +1,1 @@
-# EnterpriseSample-WebAPI
+# Enterprise Sample-WebAPI
