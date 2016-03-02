@@ -157,9 +157,17 @@ namespace WebApplication4.Controllers
             sqlCmd.Parameters["@Ret_Parameter"].Size = 500;
             sqlCmd.Parameters["@Ret_Parameter"].Direction = ParameterDirection.Output;
             sqlCmd.ExecuteNonQuery();
-            if (string.IsNullOrEmpty(sqlCmd.Parameters[sqlCmd.Parameters.Count - 1].Value.ToString()))
+            if (!string.IsNullOrEmpty(sqlCmd.Parameters[sqlCmd.Parameters.Count - 1].Value.ToString()))
             {
-                result = "Success" + " | " + sqlCmd.Parameters[sqlCmd.Parameters.Count - 1].Value.ToString();
+                if (sqlCmd.Parameters[sqlCmd.Parameters.Count - 1].Value.ToString().ToLower().Contains("success"))
+                {
+                    result = sqlCmd.Parameters[sqlCmd.Parameters.Count - 1].Value.ToString();
+                    //success is returned from db
+                }
+                else
+                {
+                    result = sqlCmd.Parameters[sqlCmd.Parameters.Count - 1].Value.ToString();
+                }
             }
             else
             {
