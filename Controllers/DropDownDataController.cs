@@ -35,8 +35,11 @@ namespace WebApplication4.Controllers
                 sqlCmd.Parameters.Add("@MODULENAME", SqlDbType.VarChar);
                 sqlCmd.Parameters["@MODULENAME"].Value = dropDownName.ToString();
 
-                sqlCmd.Parameters.Add("@A", SqlDbType.VarChar);
-                sqlCmd.Parameters["@A"].Value = string.IsNullOrEmpty(param1) ? "" : param1;
+                if (!string.IsNullOrEmpty(param1))
+                {
+                    sqlCmd.Parameters.Add("@A", SqlDbType.VarChar);
+                    sqlCmd.Parameters["@A"].Value = string.IsNullOrEmpty(param1) ? "" : param1;
+                }
 
                 //sqlCmd.Parameters.Add("@B", SqlDbType.VarChar);
                 //sqlCmd.Parameters["@B"].Value = param2.ToString();
