@@ -29,7 +29,7 @@ namespace WebApplication4.Controllers
                 count = count == 0 ? 10 : count;
                 SqlDataReader reader = null;
                 SqlConnection myConnection = new SqlConnection();
-                myConnection.ConnectionString = @"Data Source=192.168.0.110;Initial Catalog=TTSHTemp;User ID=sa;Password=ROOT#123";
+                myConnection.ConnectionString = Config.ConnectionString;
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = myConnection;
                 myConnection.Open();

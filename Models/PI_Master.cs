@@ -95,4 +95,14 @@ namespace WebApplication4.Models
 
         
     }
+
+    public class Depatrment_PI
+    {
+        public int i_PI_ID { get; set; }
+        public int i_dept_id { get; set; }
+        public string s_email { get; set; }
+        public string s_name { get; set; }
+        public string s_mcrno { get; set; }
+        public string s_phone { get; set; }
+    }
 }

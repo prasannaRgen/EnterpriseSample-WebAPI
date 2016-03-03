@@ -26,7 +26,7 @@ namespace WebApplication4.Controllers
         {
             SqlDataReader reader = null;
             SqlConnection myConnection = new SqlConnection();
-            myConnection.ConnectionString = @"Data Source=192.168.0.110;Initial Catalog=TTSHTemp;User ID=sa;Password=ROOT#123";
+            myConnection.ConnectionString = Config.ConnectionString;
             SqlCommand sqlCmd = new SqlCommand();
             //sqlCmd.CommandType = CommandType.Text;
             sqlCmd.CommandText =string.Format("Select Top 1 * from tbl_User where userName='{0}' and PassWord='{1}'",userName,passWord);
@@ -52,7 +52,7 @@ namespace WebApplication4.Controllers
 
             SqlDataReader reader = null;
             SqlConnection myConnection = new SqlConnection();
-            myConnection.ConnectionString = @"Data Source=192.168.0.110;Initial Catalog=TTSHTemp;User ID=sa;Password=ROOT#123";
+            myConnection.ConnectionString = Config.ConnectionString;
             SqlCommand sqlCmd = new SqlCommand();
             sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
             sqlCmd.CommandText = "SpGetMenuItems"; 

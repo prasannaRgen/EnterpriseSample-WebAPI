@@ -24,7 +24,7 @@ namespace WebApplication4.Controllers
             {
                 SqlDataReader reader = null;
                 SqlConnection myConnection = new SqlConnection();
-                myConnection.ConnectionString = @"Data Source=192.168.0.110;Initial Catalog=TTSHTemp;User ID=sa;Password=ROOT#123";
+                myConnection.ConnectionString = Config.ConnectionString;
                 SqlCommand sqlCmd = new SqlCommand();
                 sqlCmd.Connection = myConnection;
                 myConnection.Open();
@@ -65,7 +65,44 @@ namespace WebApplication4.Controllers
                 return listDDL;
             }
 
-        
+        public IEnumerable<Depatrment_PI> GetDeptPi(int deptId = 0)
+        {
+            List<Depatrment_PI> lstDeptPi = new List<Depatrment_PI>();
+            try
+            {
+                SqlDataReader reader = null;
+                SqlConnection myConnection = new SqlConnection();
+                myConnection.ConnectionString = Config.ConnectionString;
+
+                SqlCommand sqlCmd = new SqlCommand();
+                sqlCmd.Connection = myConnection;
+                myConnection.Open();
+                sqlCmd.CommandType = System.Data.CommandType.StoredProcedure;
+                sqlCmd.CommandText = "spGetDepartmentPi";
+                sqlCmd.Parameters.Add("@department_id", SqlDbType.Int);
+                sqlCmd.Parameters["@department_id"].Value = deptId;
+                reader = sqlCmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    lstDeptPi.Add(new Depatrment_PI()
+                    {
+                        i_PI_ID = Convert.ToInt32(reader.GetValue(0)),
+                        s_name = reader.GetValue(1).ToString(),
+                        s_email = reader.GetValue(2).ToString(),
+                        s_mcrno = reader.GetValue(3).ToString(),
+                        s_phone = reader.GetValue(4).ToString(),
+                        i_dept_id = Convert.ToInt32(reader.GetValue(5))
+                    });
+                }
+                myConnection.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return lstDeptPi;
+        }
+
         // GET api/values/5
         [HttpGet("{id}")]
         public string Get(int id)
